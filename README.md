@@ -1,7 +1,7 @@
 
 # SLM Coiffure
 
-![SLM Coiffure Logo](https://scontent-cdg4-2.xx.fbcdn.net/v/t39.30808-6/374563233_24722634737335983_4959529947091801159_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=783fdb&_nc_ohc=bVWQAwbV2I4AX_SSxaE&_nc_ht=scontent-cdg4-2.xx&oh=00_AfAakNj0oNEZYReIvKSzC6D9HgcIRvRDR161whzDXJc1oA&oe=65D9F6F3)
+![SLM Coiffure Logo](https://scontent-cdg4-2.xx.fbcdn.net/v/t39.30808-6/374563233_24722634737335983_4959529947091801159_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=5f2048&_nc_ohc=kzFJ5sYWlZoAX8vNTo5&_nc_ht=scontent-cdg4-2.xx&oh=00_AfB6RVnjUPbMnZA7qdKeskTnLGFdHuQJcnNDhhZpsxZYRA&oe=65F3AC33)
 
 SLM Coiffure est une application web et mobile conçue pour simplifier la gestion des rendez-vous pour un salon de coiffure local. Cette application permet aux clients de réserver facilement des rendez-vous en ligne et de découvrir les différents services offerts par le salon.
 
