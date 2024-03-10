@@ -1,0 +1,20 @@
+{
+  "name": "slm-coiffure...by-anais.g",
+  "version": "1.0.0",
+  "description": "Projet Node.js API, alimentant mes applications web et mobile en React et React Native.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BIDcolonel/SLM-Coiffure..by-Anais.G.git"
+  },
+  "author": "Boudier Christophe",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BIDcolonel/SLM-Coiffure..by-Anais.G/issues"
+  },
+  "homepage": "https://github.com/BIDcolonel/SLM-Coiffure..by-Anais.G#readme"
+}
