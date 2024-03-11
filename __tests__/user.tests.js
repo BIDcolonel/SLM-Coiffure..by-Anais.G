@@ -1,3 +1,9 @@
+/**
+ * Fichier : user.tests.js
+ * Description : Test des routes pour les utilisateurs de l'application SLM Coiffure...by Anais.G
+ * Auteur : BOUDIER Christophe
+ */
+
 const mongoose = require('mongoose');
 const request = require('supertest');
 const app = require('../index');

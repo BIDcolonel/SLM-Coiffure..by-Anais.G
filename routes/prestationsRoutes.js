@@ -1,3 +1,9 @@
+/**
+ * Fichier : prestationsRoutes.js
+ * Description : Route pour les prestations de l'application SLM Coiffure...by Anais.G
+ * Auteur : BOUDIER Christophe
+ */
+
 const express = require('express');
 const router = express.Router();
 const PrestationController = require('../controllers/prestationsController.js');
