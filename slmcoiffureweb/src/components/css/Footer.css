@@ -1,0 +1,14 @@
+footer {
+  position: sticky;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20px;
+  background-color: #c1a28e;
+  text-align: center;
+  font-size: 14px;
+}
+
+footer p {
+  margin: 0 auto;
+}

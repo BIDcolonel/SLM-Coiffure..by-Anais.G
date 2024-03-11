@@ -1,0 +1,34 @@
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+th {
+  background-color: #f2f2f2;
+  padding: 10px;
+  text-align: left;
+}
+
+td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+tr:nth-child(odd) {
+  background-color: #f9f9f9;
+}
+
+tr:hover {
+  background-color: #f2f2f2;
+}
+
+.prestations-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.prestations-container > div {
+  width: 50%;
+}
