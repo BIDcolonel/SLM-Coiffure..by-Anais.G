@@ -41,47 +41,51 @@ const ContactInfo = () => {
   };
 
   return (
-    <div className="contact-container">
-      <div className="contact-info">
+    <div className="contact-page-container">
+      <div className="contact-page-header">
         <h2>Informations de contact</h2>
-        {contactInfo.map(info => (
-          <div key={info._id}>
-            <p>Adresse : {info.address}</p>
-            <p>Téléphone : {info.phone}</p>
-            {info.email && (
-              <p>Email : <a href={`mailto:${info.email}`}>{info.email}</a></p>
-            )}
-            {info.facebook && (
-              <p>Facebook : <a href={info.facebook} target="_blank" rel="noopener noreferrer">{info.facebook}</a></p>
-            )}
-          </div>
-        ))}
       </div>
-      <div className="contact-form">
-        <h2>Formulaire de contact</h2>
-        <form onSubmit={handleSubmit}>
-          <div>
-            <label htmlFor="name">Nom et Prénom :</label>
-            <input type="text" id="name" name="name" required />
-          </div>
-          <div>
-            <label htmlFor="email">Email :</label>
-            <input type="email" id="email" name="email" required />
-          </div>
-          <div>
-            <label htmlFor="message">Message :</label>
-            <textarea
-              id="message"
-              name="message"
-              maxLength="400"
-              required
-              style={{ width: '70%', height: '200px', resize: 'none' }}
-              onChange={handleMessageChange}
-            />
-            <p>{messageLength}/400 caractères</p>
-          </div>
-          <button type="submit">Envoyer</button>
-        </form>
+      <div className="contact-content">
+        <div className="contact-info">
+          <h2>Informations de contact</h2>
+          {contactInfo.map(info => (
+            <div key={info._id}>
+              <p>Adresse : {info.address}</p>
+              <p>Téléphone : {info.phone}</p>
+              {info.email && (
+                <p>Email : <a href={`mailto:${info.email}`}>{info.email}</a></p>
+              )}
+              {info.facebook && (
+                <p>Facebook : <a href={info.facebook} target="_blank" rel="noopener noreferrer">{info.facebook}</a></p>
+              )}
+            </div>
+          ))}
+        </div>
+        <div className="contact-form">
+          <h2>Formulaire de contact</h2>
+          <form onSubmit={handleSubmit}>
+            <div>
+              <label htmlFor="name">Nom et Prénom :</label>
+              <input type="text" id="name" name="name" required />
+            </div>
+            <div>
+              <label htmlFor="email">Email :</label>
+              <input type="email" id="email" name="email" required />
+            </div>
+            <div>
+              <label htmlFor="message">Message :</label>
+              <textarea
+                id="message"
+                name="message"
+                maxLength="400"
+                required
+                onChange={handleMessageChange}
+              />
+              <p>{messageLength}/400 caractères</p>
+            </div>
+            <button type="submit">Envoyer</button>
+          </form>
+        </div>
       </div>
     </div>
   );

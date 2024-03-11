@@ -1,65 +1,61 @@
 header {
-    position: relative;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-    background-color: #c1a28e;
-  }
+  background-color: #c1a28e;
+  padding: 10px 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  height: 175px;
+}
 
-  .logo {
-    font-size: 24px;
-    font-weight: bold;
-  }
+.logo {
+  margin-left: 20px;
+}
 
-  .logo img {
-    max-width: 100px;
-    max-height: 100px;
-  }
+.logo img {
+  width: 175px;
+}
 
-  .center {
-    font-size: 18px;
-  }
+nav {
+  text-align: center;
+}
 
-  .right {
-    display: flex;
-    align-items: center;
-  }
+nav ul {
+  list-style-type: none;
+  padding: 0;
+}
 
-  .facebook {
-    margin-right: 10px;
-    padding: 8px 16px;
-    background-color: #1877f2;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
+nav ul li {
+  display: inline-block;
+  margin-right: 20px;
+}
 
-  .connect {
-    padding: 8px 16px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
+nav ul li:last-child {
+  margin-right: 0;
+}
 
-  nav ul {
-    list-style-type: none;
-    display: flex;
-  }
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.2rem;
+  padding: 10px 20px;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
 
-  nav ul li {
-    margin-right: 20px;
-  }
+nav ul li a:hover {
+  background-color: #a1856f;
+}
 
-  nav ul li:last-child {
-    margin-right: 0;
-  }
+nav ul li button {
+  background-color: #dc3545;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
 
-  nav ul li a {
-    text-decoration: none;
-    color: #333;
-    font-weight: bold;
-  }
+nav ul li button:hover {
+  background-color: #c82333;
+}
