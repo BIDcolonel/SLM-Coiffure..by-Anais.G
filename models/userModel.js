@@ -1,3 +1,9 @@
+/**
+ * Fichier : userModel.js
+ * Description : Modèle pour les utilisateurs de l'application SLM Coiffure...by Anais.G
+ * Auteur : BOUDIER Christophe
+ */
+
 const mongoose = require('mongoose');
 const validator = require('validator');
 const phoneUtil = require('google-libphonenumber').PhoneNumberUtil.getInstance();

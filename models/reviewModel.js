@@ -1,3 +1,9 @@
+/**
+ * Fichier : reviewModel.js
+ * Description : Modèle pour les avis de l'application SLM Coiffure...by Anais.G
+ * Auteur : BOUDIER Christophe
+ */
+
 const mongoose = require('mongoose');
 
 const reviewSchema = new mongoose.Schema({

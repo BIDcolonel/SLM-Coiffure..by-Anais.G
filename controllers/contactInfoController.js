@@ -1,3 +1,9 @@
+/**
+ * Fichier : contactInfoController.js
+ * Description : Contrôleur pour les informations de contact de l'application SLM Coiffure...by Anais.G
+ * Auteur : BOUDIER Christophe
+ */
+
 const ContactInfo = require('../models/contactInfoModel');
 const nodemailer = require('nodemailer');
 

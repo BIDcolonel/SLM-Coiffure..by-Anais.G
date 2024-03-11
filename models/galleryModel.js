@@ -1,3 +1,9 @@
+/**
+ * Fichier : galleryModel.js
+ * Description : Modèle pour les images de la galerie de photos de l'application SLM Coiffure...by Anais.G
+ * Auteur : BOUDIER Christophe
+ */
+
 const mongoose = require('mongoose');
 
 const galleryPhotoSchema = new mongoose.Schema({

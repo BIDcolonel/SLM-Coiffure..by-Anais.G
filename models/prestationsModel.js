@@ -1,3 +1,9 @@
+/**
+ * Fichier : prestationsModel.js
+ * Description : Modèle pour les prestations de l'application SLM Coiffure...by Anais.G
+ * Auteur : BOUDIER Christophe
+ */
+
 const mongoose = require('mongoose');
 
 const prestationsSchema = new mongoose.Schema({
