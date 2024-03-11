@@ -1,3 +1,9 @@
+/**
+ * Fichier : prestations.tests.js
+ * Description : Test des routes pour les prestations de l'application SLM Coiffure...by Anais.G
+ * Auteur : BOUDIER Christophe
+ */
+
 const mongoose = require('mongoose');
 const request = require('supertest');
 const app = require('../index'); // Votre fichier d'entrée (index.js)

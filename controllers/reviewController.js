@@ -1,3 +1,9 @@
+/**
+ * Fichier : reviewController.js
+ * Description : Contrôleur pour les avis de l'application SLM Coiffure...by Anais.G
+ * Auteur : BOUDIER Christophe
+ */
+
 const Review = require('../models/reviewModel.js');
 
 // Contrôleur pour la création d'un nouvel avis

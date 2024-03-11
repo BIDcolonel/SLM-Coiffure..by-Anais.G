@@ -1,3 +1,9 @@
+/**
+ * Fichier : prestationsController.js
+ * Description : Contrôleur pour les prestations de l'application SLM Coiffure...by Anais.G
+ * Auteur : BOUDIER Christophe
+ */
+
 const Prestation = require('../models/prestationsModel');
 
 // Contrôleur pour la création d'une prestation

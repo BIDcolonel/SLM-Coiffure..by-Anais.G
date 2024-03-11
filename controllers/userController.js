@@ -1,3 +1,9 @@
+/**
+ * Fichier : userController.js
+ * Description : Contrôleur pour les utilisateurs de l'application SLM Coiffure...by Anais.G
+ * Auteur : BOUDIER Christophe
+ */
+
 require('dotenv').config();
 
 const bcrypt = require('bcrypt');

@@ -1,3 +1,9 @@
+/**
+ * Fichier : review.tests.js
+ * Description : Test des routes pour les avis de l'application SLM Coiffure...by Anais.G
+ * Auteur : BOUDIER Christophe
+ */
+
 const mongoose = require('mongoose');
 const request = require('supertest');
 const app = require('../index');

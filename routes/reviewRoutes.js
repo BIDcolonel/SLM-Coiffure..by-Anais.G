@@ -1,3 +1,9 @@
+/**
+ * Fichier : reviewRoutes.js
+ * Description : Route pour les avis de l'application SLM Coiffure...by Anais.G
+ * Auteur : BOUDIER Christophe
+ */
+
 const express = require('express');
 const router = express.Router();
 const ReviewController = require('../controllers/reviewController.js');

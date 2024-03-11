@@ -1,3 +1,9 @@
+/**
+ * Fichier : jwtUtils.js
+ * Description : Utilitaire pour générer un token JWT
+ * Auteur : BOUDIER Christophe
+ */
+
 const jwt = require('jsonwebtoken');
 
 function generateJWTToken(email) {
