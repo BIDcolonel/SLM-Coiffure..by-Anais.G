@@ -35,30 +35,26 @@ const GalleryPage = () => {
   };
 
   return (
-    <div>
-      <h2>Galerie Photo</h2>
-      <div>
+    <div className="gallery-page-container">
+      <div className="gallery-page-header">
+        <h2>Galerie Photo</h2>
+      </div>
+      <div className="gallery-buttons">
         {/* Boutons de filtrage basés sur les tags */}
         <button onClick={() => handleFilter('all')}>Toutes</button>
         {tags.map(tag => (
           <button key={tag} onClick={() => handleFilter(tag)}>{tag}</button>
         ))}
       </div>
-      <div>
-        <table>
-          <tbody>
-            <tr>
-              {/* Afficher les images filtrées dans un tableau */}
-              {filteredImages.map(image => (
-                <td key={image._id} style={{ textAlign: 'center', padding: '10px' }}>
-                  <img className="gallery-image" src={image.imageUrl} alt={image.title} />
-                  <p style={{ marginTop: '10px' }}>{image.title}</p>
-                </td>
-              ))}
-            </tr>
-          </tbody>
-        </table>
-</div>
+      <div className="gallery-images">
+        {/* Afficher les images filtrées */}
+        {filteredImages.map(image => (
+          <div key={image._id}>
+            <img className="gallery-image" src={image.imageUrl} alt={image.title} />
+            <p>{image.title}</p>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
