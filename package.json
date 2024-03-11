@@ -5,9 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "start": "npm-run-all --parallel server1 server2",
-    "server1": "node index.js",
-    "server2": "cd slmcoiffureweb && npm start"
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
