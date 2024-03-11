@@ -1,7 +1,49 @@
+.gallery-page-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f8f9fa;
+}
+
+.gallery-page-header {
+  background-color: #c1a28e;
+  padding: 10px 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  height: 75px;
+}
+
+.gallery-page-header h2 {
+  text-align: center;
+  color: white;
+}
+
+.gallery-buttons {
+  margin-bottom: 20px;
+}
+
+.gallery-buttons button {
+  margin-right: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.gallery-buttons button:hover {
+  background-color: #0056b3;
+}
+
+.gallery-images {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
 .gallery-image {
-  max-width: 250px;
-  max-height: 250px;
-  width: auto;
-  height: auto;
-  margin: 5px; /* Marge entre les images */
+  margin: 10px;
+  width: 200px;
 }

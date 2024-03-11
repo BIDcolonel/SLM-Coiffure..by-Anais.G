@@ -46,12 +46,12 @@ const Prestations = () => {
             </tr>
           </thead>
           <tbody>
-            {sortByAlphabeticalOrder(prestations.filter(prestation => prestation.clientTypes.includes('Femme') && prestation.hairLength === 'Long')).map(filteredPrestation => (
-              <tr key={filteredPrestation._id}>
-                <td>{filteredPrestation.name}</td>
-                <td>{filteredPrestation.price}</td>
-              </tr>
-            ))}
+          {sortByAlphabeticalOrder(prestations.filter(prestation => prestation.clientTypes.includes('Femme') && prestation.hairLength === 'Long')).map(filteredPrestation => (
+            <tr key={filteredPrestation._id}>
+              <td>{filteredPrestation.name}</td>
+              <td className="price">{filteredPrestation.price}</td> {/* Ajoutez la classe "price" ici */}
+            </tr>
+          ))}
           </tbody>
         </table>
         <h3>Cheveux Mi-longs</h3>
@@ -63,12 +63,12 @@ const Prestations = () => {
             </tr>
           </thead>
           <tbody>
-            {sortByAlphabeticalOrder(prestations.filter(prestation => prestation.clientTypes.includes('Femme') && prestation.hairLength === 'Mi-long')).map(filteredPrestation => (
-              <tr key={filteredPrestation._id}>
-                <td>{filteredPrestation.name}</td>
-                <td>{filteredPrestation.price}</td>
-              </tr>
-            ))}
+          {sortByAlphabeticalOrder(prestations.filter(prestation => prestation.clientTypes.includes('Femme') && prestation.hairLength === 'Mi-long')).map(filteredPrestation => (
+            <tr key={filteredPrestation._id}>
+              <td>{filteredPrestation.name}</td>
+              <td className="price">{filteredPrestation.price}</td> {/* Ajoutez la classe "price" ici */}
+            </tr>
+          ))}
           </tbody>
         </table>
         <h3>Cheveux Courts</h3>
@@ -80,12 +80,12 @@ const Prestations = () => {
             </tr>
           </thead>
           <tbody>
-            {sortByAlphabeticalOrder(prestations.filter(prestation => prestation.clientTypes.includes('Femme') && prestation.hairLength === 'Court')).map(filteredPrestation => (
-              <tr key={filteredPrestation._id}>
-                <td>{filteredPrestation.name}</td>
-                <td>{filteredPrestation.price}</td>
-              </tr>
-            ))}
+          {sortByAlphabeticalOrder(prestations.filter(prestation => prestation.clientTypes.includes('Femme') && prestation.hairLength === 'Court')).map(filteredPrestation => (
+            <tr key={filteredPrestation._id}>
+              <td>{filteredPrestation.name}</td>
+              <td className="price">{filteredPrestation.price}</td> {/* Ajoutez la classe "price" ici */}
+            </tr>
+          ))}
           </tbody>
         </table>
       </div>
@@ -99,12 +99,12 @@ const Prestations = () => {
             </tr>
           </thead>
           <tbody>
-            {sortByAlphabeticalOrder(prestations.filter(prestation => prestation.clientTypes.includes('Homme'))).map(filteredPrestation => (
-              <tr key={filteredPrestation._id}>
-                <td>{filteredPrestation.name}</td>
-                <td>{filteredPrestation.price}</td>
-              </tr>
-            ))}
+          {sortByAlphabeticalOrder(prestations.filter(prestation => prestation.clientTypes.includes('Homme'))).map(filteredPrestation => (
+            <tr key={filteredPrestation._id}>
+              <td>{filteredPrestation.name}</td>
+              <td className="price">{filteredPrestation.price}</td> {/* Ajoutez la classe "price" ici */}
+            </tr>
+          ))}
           </tbody>
         </table>
       </div>
@@ -118,12 +118,12 @@ const Prestations = () => {
             </tr>
           </thead>
           <tbody>
-            {sortByAlphabeticalOrder(prestations.filter(prestation => prestation.clientTypes.includes('Enfant'))).map(filteredPrestation => (
-              <tr key={filteredPrestation._id}>
-                <td>{filteredPrestation.name}</td>
-                <td>{filteredPrestation.price}</td>
-              </tr>
-            ))}
+          {sortByAlphabeticalOrder(prestations.filter(prestation => prestation.clientTypes.includes('Enfant'))).map(filteredPrestation => (
+            <tr key={filteredPrestation._id}>
+              <td>{filteredPrestation.name}</td>
+              <td className="price">{filteredPrestation.price}</td> {/* Ajoutez la classe "price" ici */}
+            </tr>
+          ))}
           </tbody>
         </table>
       </div>
