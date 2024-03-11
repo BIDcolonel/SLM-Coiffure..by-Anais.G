@@ -1,0 +1,7 @@
+.gallery-image {
+  max-width: 250px;
+  max-height: 250px;
+  width: auto;
+  height: auto;
+  margin: 5px; /* Marge entre les images */
+}
