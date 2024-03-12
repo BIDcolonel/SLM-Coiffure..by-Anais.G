@@ -1,8 +1,38 @@
 .prestations-container {
-  max-width: 800px;
+  display: flex;
+  max-width: 1000px;
   margin: 0 auto;
   padding: 20px;
   background-color: #f8f9fa;
+}
+
+.buttons-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.buttons-container button,
+.tabs-container button {
+  margin-bottom: 10px;
+  border-radius: 20px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.tabs-container {
+  flex: 3;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.tables-container {
+  flex: 3;
 }
 
 .prestations-container h2 {

@@ -42,9 +42,6 @@ const ContactInfo = () => {
 
   return (
     <div className="contact-page-container">
-      <div className="contact-page-header">
-        <h2>Informations de contact</h2>
-      </div>
       <div className="contact-content">
         <div className="contact-info">
           <h2>Informations de contact</h2>

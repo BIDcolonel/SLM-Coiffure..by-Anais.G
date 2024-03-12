@@ -89,14 +89,15 @@ exports.getAllUserProfiles = async (req, res) => {
 // Contrôleur pour mettre à jour le profil utilisateur
 exports.updateUserProfile = async (req, res) => {
   try {
-    const { firstName, lastName, address, phone, gender, age } = req.body;
+    const { firstName, lastName, address, phone, gender, age, role } = req.body;
     const updatedUser = await User.findByIdAndUpdate(req.params.userId, {
       firstName,
       lastName,
       address,
       phone,
       gender,
-      age
+      age,
+      role // Ajouter le champ "role" à la mise à jour
     }, { new: true });
     res.status(200).json({ success: true, data: updatedUser });
   } catch (error) {

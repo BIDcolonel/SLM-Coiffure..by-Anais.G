@@ -9,9 +9,6 @@ import '../components/css/Admin.css';
 const AdminPages = () => {
   return (
     <div className="admin-page-container">
-      <div className="admin-page-header">
-        <h1>Page d'administration</h1>
-      </div>
       <div className="admin-content">
         {/* Sous-composants pour gérer chaque type de données */}
         <ClientManagement />

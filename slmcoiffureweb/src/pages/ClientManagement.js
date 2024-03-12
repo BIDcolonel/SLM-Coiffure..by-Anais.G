@@ -6,32 +6,45 @@ const apiUrl = process.env.REACT_APP_API_URL;
 const ClientManagement = () => {
   const [clients, setClients] = useState([]);
   const [editedClient, setEditedClient] = useState({});
-  const [isEditing, setIsEditing] = useState(false);
+  const [newClient, setNewClient] = useState({
+    email: '',
+    password: '',
+    firstName: '',
+    lastName: '',
+    address: '',
+    phone: '',
+    gender: '',
+    age: '',
+    role: 'client'
+  });
+  const [editingClientId, setEditingClientId] = useState(null);
+  const [isCreating, setIsCreating] = useState(false);
 
   useEffect(() => {
-    axios.get(`${apiUrl}/api/users`)
+    fetchClients();
+  }, []);
+
+  const fetchClients = () => {
+    axios.get(`${apiUrl}/api/users/read`)
       .then(response => {
         setClients(response.data.data);
       })
       .catch(error => {
         console.error('Erreur lors de la récupération des clients:', error);
       });
-  }, []);
+  };
 
-  const handleEdit = (client) => {
-    setEditedClient(client);
-    setIsEditing(true);
+  const handleEdit = (clientId) => {
+    const clientToEdit = clients.find(client => client._id === clientId);
+    setEditedClient(clientToEdit);
+    setEditingClientId(clientId);
   };
 
   const handleUpdate = () => {
-    axios.put(`${apiUrl}/api/users/${editedClient._id}`, editedClient)
+    axios.put(`${apiUrl}/api/users/update/${editedClient._id}`, editedClient)
       .then(() => {
-        setIsEditing(false);
-        // Mettre à jour la liste des clients après modification
-        axios.get(`${apiUrl}/api/users`)
-          .then(response => {
-            setClients(response.data.data);
-          });
+        setEditingClientId(null);
+        fetchClients();
       })
       .catch(error => {
         console.error('Erreur lors de la mise à jour du client:', error);
@@ -39,39 +52,130 @@ const ClientManagement = () => {
   };
 
   const handleDelete = (clientId) => {
-    axios.delete(`${apiUrl}/api/users/${clientId}`)
+    axios.delete(`${apiUrl}/api/users/delete/${clientId}`)
       .then(() => {
-        // Mettre à jour la liste des clients après suppression
-        setClients(clients.filter(client => client._id !== clientId));
+        fetchClients();
       })
       .catch(error => {
         console.error('Erreur lors de la suppression du client:', error);
       });
   };
 
+  const handleCreate = () => {
+    setIsCreating(prevState => !prevState);
+    if (!isCreating) {
+      setNewClient({
+        email: '',
+        password: '',
+        firstName: '',
+        lastName: '',
+        address: '',
+        phone: '',
+        gender: '',
+        age: '',
+        role: 'client'
+      });
+    }
+  };
+
+  const handleSave = () => {
+    axios.post(`${apiUrl}/api/users/create`, newClient)
+      .then(response => {
+        setClients([...clients, response.data.data]);
+        setIsCreating(false);
+      })
+      .catch(error => {
+        console.error('Erreur lors de la création du client:', error);
+      });
+  };
+
   return (
     <div>
       <h2>Gestion des clients</h2>
-      {clients.map(client => (
-        <div key={client._id}>
-          <p>Nom: {client.lastName}</p>
-          <p>Prénom: {client.firstName}</p>
-          <p>Email: {client.email}</p>
-          <p>Role: {client.role}</p>
-          <button onClick={() => handleEdit(client)}>Modifier</button>
-          <button onClick={() => handleDelete(client._id)}>Supprimer</button>
-        </div>
-      ))}
-      {isEditing && (
+      <button onClick={handleCreate}>{isCreating ? 'Annuler' : 'Ajouter un nouveau client'}</button>
+      {isCreating && (
         <div>
-          <h3>Modifier le client</h3>
-          <input type="text" value={editedClient.firstName} onChange={(e) => setEditedClient({ ...editedClient, firstName: e.target.value })} />
-          <input type="text" value={editedClient.lastName} onChange={(e) => setEditedClient({ ...editedClient, lastName: e.target.value })} />
-          <input type="email" value={editedClient.email} onChange={(e) => setEditedClient({ ...editedClient, email: e.target.value })} />
-          <input type="text" value={editedClient.phone} onChange={(e) => setEditedClient({ ...editedClient, phone: e.target.value })} />
-          <button onClick={handleUpdate}>Enregistrer</button>
+          <h3>Ajouter un nouveau client</h3>
+          <input type="email" placeholder="Email" value={newClient.email} onChange={(e) => setNewClient({ ...newClient, email: e.target.value })} />
+          <input type="password" placeholder="Mot de passe" value={newClient.password} onChange={(e) => setNewClient({ ...newClient, password: e.target.value })} />
+          <input type="text" placeholder="Prénom" value={newClient.firstName} onChange={(e) => setNewClient({ ...newClient, firstName: e.target.value })} />
+          <input type="text" placeholder="Nom" value={newClient.lastName} onChange={(e) => setNewClient({ ...newClient, lastName: e.target.value })} />
+          <input type="text" placeholder="Adresse" value={newClient.address} onChange={(e) => setNewClient({ ...newClient, address: e.target.value })} />
+          <input type="text" placeholder="Téléphone" value={newClient.phone} onChange={(e) => setNewClient({ ...newClient, phone: e.target.value })} />
+          <select value={newClient.gender} onChange={(e) => setNewClient({ ...newClient, gender: e.target.value })}>
+            <option value="">Sélectionner le sexe</option>
+            <option value="Homme">Homme</option>
+            <option value="Femme">Femme</option>
+          </select>
+          <input type="number" placeholder="Âge" value={newClient.age} onChange={(e) => setNewClient({ ...newClient, age: e.target.value })} />
+          <select value={newClient.role} onChange={(e) => setNewClient({ ...newClient, role: e.target.value })}>
+            <option value="client">Client</option>
+            <option value="admin">Admin</option>
+          </select>
+          <button onClick={handleSave}>Ajouter</button>
         </div>
       )}
+      <table className="client-table">
+        <thead>
+          <tr>
+            <th>Email</th>
+            <th>Prénom</th>
+            <th>Nom</th>
+            <th>Adresse</th>
+            <th>Téléphone</th>
+            <th>Sexe</th>
+            <th>Âge</th>
+            <th>Rôle</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {clients.map(client => (
+            <React.Fragment key={client._id}>
+              <tr>
+                <td>{client.email}</td>
+                <td>{client.firstName}</td>
+                <td>{client.lastName}</td>
+                <td>{client.address}</td>
+                <td>{client.phone}</td>
+                <td>{client.gender}</td>
+                <td>{client.age}</td>
+                <td>{client.role}</td>
+                <td>
+                  <button onClick={() => handleEdit(client._id)}>Modifier</button>
+                  <button onClick={() => handleDelete(client._id)}>Supprimer</button>
+                </td>
+              </tr>
+              {editingClientId === client._id && (
+                <tr>
+                  <td colSpan="9">
+                    <div>
+                      <h3>Modifier le client</h3>
+                      <input type="email" value={editedClient.email} onChange={(e) => setEditedClient({ ...editedClient, email: e.target.value })} />
+                      <input type="password" value={editedClient.password} onChange={(e) => setEditedClient({ ...editedClient, password: e.target.value })} />
+                      <input type="text" value={editedClient.firstName} onChange={(e) => setEditedClient({ ...editedClient, firstName: e.target.value })} />
+                      <input type="text" value={editedClient.lastName} onChange={(e) => setEditedClient({ ...editedClient, lastName: e.target.value })} />
+                      <input type="text" value={editedClient.address} onChange={(e) => setEditedClient({ ...editedClient, address: e.target.value })} />
+                      <input type="text" value={editedClient.phone} onChange={(e) => setEditedClient({ ...editedClient, phone: e.target.value })} />
+                      <select value={editedClient.gender} onChange={(e) => setEditedClient({ ...editedClient, gender: e.target.value })}>
+                        <option value="">Sélectionner le sexe</option>
+                        <option value="Homme">Homme</option>
+                        <option value="Femme">Femme</option>
+                      </select>
+                      <input type="number" value={editedClient.age} onChange={(e) => setEditedClient({ ...editedClient, age: e.target.value })} />
+                      <select value={editedClient.role} onChange={(e) => setEditedClient({ ...editedClient, role: e.target.value })}>
+                        <option value="client">Client</option>
+                        <option value="admin">Admin</option>
+                      </select>
+                      <button onClick={handleUpdate}>Enregistrer</button>
+                    </div>
+                  </td>
+                </tr>
+              )}
+            </React.Fragment>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 };

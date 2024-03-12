@@ -6,32 +6,35 @@ const apiUrl = process.env.REACT_APP_API_URL;
 const ServiceManagement = () => {
   const [services, setServices] = useState([]);
   const [editedService, setEditedService] = useState({});
-  const [isEditing, setIsEditing] = useState(false);
+  const [newService, setNewService] = useState({ name: '', price: '', clientTypes: '', hairLength: '' });
+  const [editingServiceId, setEditingServiceId] = useState(null);
+  const [isCreating, setIsCreating] = useState(false);
 
   useEffect(() => {
-    axios.get(`${apiUrl}/api/prestations`)
+    fetchServices();
+  }, []);
+
+  const fetchServices = () => {
+    axios.get(`${apiUrl}/api/prestations/read`)
       .then(response => {
-        setServices(response.data);
+        setServices(response.data.data);
       })
       .catch(error => {
         console.error('Erreur lors de la récupération des prestations:', error);
       });
-  }, []);
+  };
 
-  const handleEdit = (service) => {
-    setEditedService(service);
-    setIsEditing(true);
+  const handleEdit = (serviceId) => {
+    const serviceToEdit = services.find(service => service._id === serviceId);
+    setEditedService(serviceToEdit);
+    setEditingServiceId(serviceId);
   };
 
   const handleUpdate = () => {
-    axios.put(`${apiUrl}/api/prestations/${editedService._id}`, editedService)
+    axios.put(`${apiUrl}/api/prestations/update/${editedService._id}`, editedService)
       .then(() => {
-        setIsEditing(false);
-        // Mettre à jour la liste des prestations après modification
-        axios.get(`${apiUrl}/api/prestations`)
-          .then(response => {
-            setServices(response.data);
-          });
+        setEditingServiceId(null);
+        fetchServices();
       })
       .catch(error => {
         console.error('Erreur lors de la mise à jour de la prestation:', error);
@@ -39,41 +42,108 @@ const ServiceManagement = () => {
   };
 
   const handleDelete = (serviceId) => {
-    axios.delete(`${apiUrl}/api/prestations/${serviceId}`)
+    axios.delete(`${apiUrl}/api/prestations/delete/${serviceId}`)
       .then(() => {
-        // Mettre à jour la liste des prestations après suppression
-        setServices(services.filter(service => service._id !== serviceId));
+        fetchServices();
       })
       .catch(error => {
         console.error('Erreur lors de la suppression de la prestation:', error);
       });
   };
 
+  const handleCreate = () => {
+    setIsCreating(prevState => !prevState);
+    if (!isCreating) {
+      setNewService({ name: '', price: '', clientTypes: '', hairLength: '' });
+    }
+  };
+
+  const handleSave = () => {
+    axios.post(`${apiUrl}/api/prestations/create`, newService)
+      .then(response => {
+        setServices([...services, response.data.data]);
+        setIsCreating(false);
+      })
+      .catch(error => {
+        console.error('Erreur lors de la création de la prestation:', error);
+      });
+  };
+
   return (
     <div>
       <h2>Gestion des prestations</h2>
-      <ul>
-        {services && services.map(service => (
-          <li key={service._id}>
-            <p>Nom: {service.name}</p>
-            <p>Prix: {service.price}</p>
-            <p>Sexe: {service.clientTypes}</p>
-            <p>Type: {service.hairLength}</p>
-            <button onClick={() => handleEdit(service)}>Modifier</button>
-            <button onClick={() => handleDelete(service._id)}>Supprimer</button>
-          </li>
-        ))}
-      </ul>
-      {isEditing && (
+      <button onClick={handleCreate}>{isCreating ? 'Annuler' : 'Ajouter une nouvelle prestation'}</button>
+      {isCreating && (
         <div>
-          <h3>Modifier la prestation</h3>
-          <input type="text" value={editedService.name} onChange={(e) => setEditedService({ ...editedService, name: e.target.value })} />
-          <input type="number" value={editedService.price} onChange={(e) => setEditedService({ ...editedService, price: e.target.value })} />
-          <input type="text" value={editedService.clientTypes} onChange={(e) => setEditedService({ ...editedService, clientTypes: e.target.value })} />
-          <input type="text" value={editedService.hairLength} onChange={(e) => setEditedService({ ...editedService, hairLength: e.target.value })} />
-          <button onClick={handleUpdate}>Enregistrer</button>
+          <h3>Ajouter une nouvelle prestation</h3>
+          <input type="text" placeholder="Nom" value={newService.name} onChange={(e) => setNewService({ ...newService, name: e.target.value })} />
+          <input type="number" placeholder="Prix" value={newService.price} onChange={(e) => setNewService({ ...newService, price: e.target.value })} />
+          <select value={newService.clientTypes} onChange={(e) => setNewService({ ...newService, clientTypes: e.target.value })}>
+            <option value="">Sélectionner le sexe</option>
+            <option value="Homme">Homme</option>
+            <option value="Femme">Femme</option>
+            <option value="Enfant">Enfant</option>
+          </select>
+          <select value={newService.hairLength} onChange={(e) => setNewService({ ...newService, hairLength: e.target.value })}>
+            <option value="">Sélectionner la longueur des cheveux</option>
+            <option value="Long">Long</option>
+            <option value="Mi-long">Mi-long</option>
+            <option value="Court">Court</option>
+          </select>
+          <button onClick={handleSave}>Ajouter</button>
         </div>
       )}
+      <table className="service-table">
+        <thead>
+          <tr>
+            <th>Nom</th>
+            <th>Prix</th>
+            <th>Sexe</th>
+            <th>Type</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {services.map(service => (
+            <React.Fragment key={service._id}>
+              <tr>
+                <td>{service.name}</td>
+                <td>{service.price}</td>
+                <td>{service.clientTypes}</td>
+                <td>{service.hairLength}</td>
+                <td>
+                  <button onClick={() => handleEdit(service._id)}>Modifier</button>
+                  <button onClick={() => handleDelete(service._id)}>Supprimer</button>
+                </td>
+              </tr>
+              {editingServiceId === service._id && (
+                <tr>
+                  <td colSpan="5">
+                    <div>
+                      <h3>Modifier la prestation</h3>
+                      <input type="text" value={editedService.name} onChange={(e) => setEditedService({ ...editedService, name: e.target.value })} />
+                      <input type="number" value={editedService.price} onChange={(e) => setEditedService({ ...editedService, price: e.target.value })} />
+                      <select value={editedService.clientTypes} onChange={(e) => setEditedService({ ...editedService, clientTypes: e.target.value })}>
+                        <option value="">Sélectionner le sexe</option>
+                        <option value="Homme">Homme</option>
+                        <option value="Femme">Femme</option>
+                        <option value="Enfant">Enfant</option>
+                      </select>
+                      <select value={editedService.hairLength} onChange={(e) => setEditedService({ ...editedService, hairLength: e.target.value })}>
+                        <option value="">Sélectionner la longueur des cheveux</option>
+                        <option value="Long">Long</option>
+                        <option value="Mi-long">Mi-long</option>
+                        <option value="Court">Court</option>
+                      </select>
+                      <button onClick={handleUpdate}>Enregistrer</button>
+                    </div>
+                  </td>
+                </tr>
+              )}
+            </React.Fragment>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 };
