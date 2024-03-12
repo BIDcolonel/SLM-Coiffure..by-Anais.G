@@ -14,10 +14,12 @@ const GalleryPage = () => {
     axios.get(`${apiUrl}/api/gallery/read`)
       .then(response => {
         setImages(response.data.data);
-        setFilteredImages(response.data.data); // Afficher toutes les images par défaut
+        setFilteredImages(response.data.data);
         // Récupérer tous les tags disponibles
         const allTags = response.data.data.flatMap(image => image.tags);
-        setTags([...new Set(allTags)]); // Supprimer les doublons de tags
+        // Filtrer les tags pour ne conserver que ceux qui ne sont pas vides
+        const filteredTags = allTags.filter(tag => tag.trim() !== '');
+        setTags([...new Set(filteredTags)]); // Supprimer les doublons de tags
       })
       .catch(error => {
         console.error('Error fetching gallery images:', error);
@@ -36,9 +38,6 @@ const GalleryPage = () => {
 
   return (
     <div className="gallery-page-container">
-      <div className="gallery-page-header">
-        <h2>Galerie Photo</h2>
-      </div>
       <div className="gallery-buttons">
         {/* Boutons de filtrage basés sur les tags */}
         <button onClick={() => handleFilter('all')}>Toutes</button>
