@@ -1,8 +1,16 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react'; // Importation des hooks useState et useEffect depuis React
 import { Link } from 'react-router-dom';
 import './css/Header.css';
 
-const Header = ({ user, onLogout }) => {
+const Header = ({ user, onLogout, isAdmin }) => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  // Authentification
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    setIsLoggedIn(token ? true : false);
+  }, []);
+
   return (
     <header>
       <div className="logo">
@@ -13,7 +21,9 @@ const Header = ({ user, onLogout }) => {
           <li><Link to="/">Accueil</Link></li>
           <li><Link to="/prestations">Nos prestations</Link></li>
           <li><Link to="/gallery">Galerie</Link></li>
-          <li><Link to="/reservation">Réservation</Link></li>
+          {isLoggedIn && (
+            <li><Link to="/reservation">Réservation</Link></li>
+          )}
           <li><Link to="/contact">Contact</Link></li>
           {user ? (
             <>
@@ -23,7 +33,9 @@ const Header = ({ user, onLogout }) => {
           ) : (
             <li><Link to="/login">Connexion</Link></li>
           )}
-          <li><Link to="/admin">Administrateur</Link></li>
+          {isAdmin && isLoggedIn && (
+            <li><Link to="/admin">Administrateur</Link></li>
+          )}
         </ul>
       </nav>
     </header>

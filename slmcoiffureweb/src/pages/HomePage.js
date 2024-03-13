@@ -8,6 +8,7 @@ const apiUrl = process.env.REACT_APP_API_URL;
 
 const HomePage = () => {
   const [reviews, setReviews] = useState([]);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   // Service de récupération des avis
   useEffect(() => {
@@ -23,13 +24,21 @@ const HomePage = () => {
     fetchReviews();
   }, []);
 
+    // Authentification
+    useEffect(() => {
+      const token = localStorage.getItem('token');
+      setIsLoggedIn(token ? true : false);
+    }, []);
+
   // Affichage de la page d'accueil
   return (
     <div className="home-container">
       <div className="hero-section">
         <h1>Bienvenue chez SLM Coiffure... by Anaïs.G</h1>
         <p>Là où le style rencontre la commodité - Votre destination ultime pour les soins capillaires.</p>
+        {isLoggedIn && (
         <a href="/reservation"><button class="book-now-button">Réservez maintenant</button></a>
+        )}
       </div>
 
       <div className="about-section">
@@ -57,7 +66,11 @@ const HomePage = () => {
       </div>
 
       <div className='reviews-section'>
-      <ReviewFormPage />
+        {isLoggedIn && (
+          <div className='reviews-section'>
+            <ReviewFormPage />
+          </div>
+        )}
         <ReviewListPage reviews={reviews} />
       </div>
     </div>

@@ -7,19 +7,19 @@
 require('dotenv').config();
 
 const bcrypt = require('bcrypt');
-const nodemailer = require('nodemailer');
+//const nodemailer = require('nodemailer');
 const User = require('../models/userModel.js');
 const crypto = require('crypto');
 const jwtUtils = require('../middlewares/jwtUtils');
 
 // Configuration de nodemailer
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: process.env.EMAIL_ADRESS,
-    pass: process.env.EMAIL_PASSWORD
-  }
-});
+//const transporter = nodemailer.createTransport({
+//  service: 'gmail',
+//  auth: {
+//    user: process.env.EMAIL_ADRESS,
+//    pass: process.env.EMAIL_PASSWORD
+//  }
+//});
 
 // Contrôleur pour la création d'un nouvel utilisateur
 exports.signup = async (req, res) => {
@@ -39,16 +39,16 @@ exports.signup = async (req, res) => {
     });
 
     // Envoi de l'e-mail
-    await transporter.sendMail({
-      from: process.env.EMAIL_ADDRESS,
-      to: email,
-      subject: 'Bienvenue sur notre plateforme',
-      html: `
-        <p>Bonjour ${firstName},</p>
-        <p>Votre compte a été créé avec succès!</p>
-        <p>Merci de rejoindre notre plateforme.</p>
-      `
-    });
+    //await transporter.sendMail({
+    //  from: process.env.EMAIL_ADDRESS,
+    //  to: email,
+    //  subject: 'Bienvenue sur notre plateforme',
+    //  html: `
+    //    <p>Bonjour ${firstName},</p>
+    //    <p>Votre compte a été créé avec succès!</p>
+    //    <p>Merci de rejoindre notre plateforme.</p>
+    //  `
+    //});
 
     res.status(201).json({ success: true, data: newUser });
   } catch (error) {
@@ -127,13 +127,14 @@ exports.login = async (req, res) => {
       return res.status(404).json({ success: false, error: 'Adresse e-mail non trouvée' });
     }
 
-    // Vérification du mot de passe
-    if (password !== user.password) {
+    // Vérification du mot de passe hashé
+    const passwordMatch = await bcrypt.compare(password, user.password);
+    if (!passwordMatch) {
       return res.status(401).json({ success: false, error: 'Mot de passe incorrect' });
     }
 
     // Génération du token JWT
-    const token = jwtUtils.generateJWTToken(email, password);
+    const token = jwtUtils.generateJWTToken(email, user.password);
 
     res.status(200).json({ success: true, token });
   } catch (error) {

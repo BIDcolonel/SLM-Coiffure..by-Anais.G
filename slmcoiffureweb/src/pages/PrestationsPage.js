@@ -76,7 +76,7 @@ const Prestations = () => {
           {sortByAlphabeticalOrder(prestations.filter(prestation => prestation.clientTypes.includes(clientType) && (clientType !== 'Femme' || prestation.hairLength === hairLength))).map(filteredPrestation => (
             <tr key={filteredPrestation._id}>
               <td>{filteredPrestation.name}</td>
-              <td className="price">{filteredPrestation.price}</td> {/* Ajoutez la classe "price" ici */}
+              <td className="price">{filteredPrestation.price}</td>
             </tr>
           ))}
           </tbody>

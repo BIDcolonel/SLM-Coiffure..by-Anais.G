@@ -19,6 +19,7 @@ import ServiceManagement from './pages/ServiceManagement';
 import ReviewManagement from './pages/ReviewManagement';
 import ClientManagement from './pages/ClientManagement';
 import GalleryManagement from './pages/GalleryManagement';
+import { AuthProvider } from './utils/AuthContext';
 
 const apiUrl = process.env.REACT_APP_API_URL;
 
@@ -68,6 +69,7 @@ const App = () => {
       <div className="App">
         <Header user={user} onLogout={handleLogout} />
         <main>
+        <AuthProvider>
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/login" element={<LoginPage onLogin={handleLogin} />} />
@@ -86,6 +88,7 @@ const App = () => {
             <Route path="/admin/clients" element={<ClientManagement />} />
             <Route path="/admin/gallery" element={<GalleryManagement />} />
           </Routes>
+        </AuthProvider>
         </main>
         <Footer />
       </div>

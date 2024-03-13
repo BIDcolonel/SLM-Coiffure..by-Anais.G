@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
-import { Link, Navigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../components/css/Login.css';
+import { useAuth } from '../utils/AuthContext';
 
-const LoginPage = ({ onLogin }) => {
+const LoginPage = () => {
   const [formData, setFormData] = useState({
     email: '',
     password: ''
   });
   const [error, setError] = useState('');
-  const [redirectToHome, setRedirectToHome] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
+  const { login } = useAuth();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -22,16 +24,15 @@ const LoginPage = ({ onLogin }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      console.log('Formulaire soumis avec les données suivantes:', formData);
       const response = await axios.post(`${apiUrl}/api/users/login`, formData);
-      console.log(response)
+      console.log('Réponse du serveur:', response.data);
       if (response.status === 200 && response.data.success) {
-        // Stocker le token dans le localStorage
+        console.log('Connexion réussie. Token reçu:', response.data.token);
         localStorage.setItem('token', response.data.token);
-        console.log(localStorage)
-        // Appeler la fonction onLogin avec les données de l'utilisateur si la connexion est réussie
-        onLogin(response.data);
-        // Activer la redirection vers la page d'accueil si la connexion est réussie
-        setRedirectToHome(true);
+        login(response.data.token);
+        console.log('Redirection vers la page principale...');
+        navigate('/');
       } else {
         setError('Identifiants incorrects');
       }
@@ -40,11 +41,6 @@ const LoginPage = ({ onLogin }) => {
       setError('Une erreur s\'est produite lors de la connexion. Veuillez réessayer.');
     }
   };
-
-  // Redirection vers la page d'accueil si la connexion est réussie
-  if (redirectToHome) {
-    return <Navigate to="/" />;
-  }
 
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
@@ -57,7 +53,6 @@ const LoginPage = ({ onLogin }) => {
         <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="Email" required />
         <div className="password-container">
           <input type={showPassword ? 'text' : 'password'} name="password" value={formData.password} onChange={handleChange} placeholder="Mot de passe" required />
-          {/* Bouton pour basculer l'affichage du mot de passe */}
           <button type="button" onClick={toggleShowPassword}>
             {showPassword ? 'Masquer' : 'Afficher'}
           </button>

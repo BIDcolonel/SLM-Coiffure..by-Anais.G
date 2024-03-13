@@ -6,25 +6,20 @@
 
 const jwt = require('jsonwebtoken');
 
-exports.extractUserId = (req, res, next) => {
-  // Extraire le token JWT du header de la requête
-  const token = req.headers.authorization;
+function verifyToken(req, res, next) {
+    const token = req.headers.authorization;
 
-  // Vérifier si le token est présent
-  if (!token) {
-    return res.status(401).json({ success: false, error: 'Token non fourni' });
-  }
+    if (!token) {
+        return res.status(403).json({ message: 'Token manquant' });
+    }
 
-  try {
-    // Vérifier et décoder le token JWT
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+        if (err) {
+            return res.status(401).json({ message: 'Token non valide' });
+        }
+        req.user = decoded;
+        next();
+    });
+}
 
-    // Extraire l'ID de l'utilisateur à partir du token décodé
-    req.userId = decoded.id;
-
-    // Passer à la prochaine middleware
-    next();
-  } catch (error) {
-    return res.status(401).json({ success: false, error: 'Token invalide' });
-  }
-};
+module.exports = verifyToken;

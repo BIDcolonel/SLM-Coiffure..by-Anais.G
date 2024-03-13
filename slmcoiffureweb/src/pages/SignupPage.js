@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import '../components/css/Signup.css';
+import { useNavigate } from 'react-router-dom';
 
 const SignupPage = () => {
   const [formData, setFormData] = useState({
@@ -18,15 +19,19 @@ const SignupPage = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const apiUrl = process.env.REACT_APP_API_URL;
+
+  const navigate = useNavigate();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('/api/users/create', formData);
+      const response = await axios.post(`${apiUrl}/api/users/create`, formData);
       console.log(response.data);
-      // Redirection ou affichage d'un message de réussite
+      // Redirection vers la page de connexion après la réussite de la création de compte
+      navigate('/login');
     } catch (error) {
       console.error('Erreur de création de l\'utilisateur:', error);
-      // Affichage d'un message d'erreur à l'utilisateur
     }
   };
 
