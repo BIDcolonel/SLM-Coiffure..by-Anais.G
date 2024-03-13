@@ -1,3 +1,9 @@
+/**
+ * Fichier : authMiddleware.js
+ * Description : Middleware pour vérifier et extraire l'ID de l'utilisateur à partir du token JWT
+ * Auteur : BOUDIER Christophe
+ */
+
 const jwt = require('jsonwebtoken');
 
 exports.extractUserId = (req, res, next) => {

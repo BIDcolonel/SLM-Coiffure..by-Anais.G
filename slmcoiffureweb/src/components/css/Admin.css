@@ -1,0 +1,24 @@
+.admin-page-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f8f9fa; /* Couleur de fond */
+  }
+  
+  .admin-page-header {
+    background-color: #c1a28e; /* Couleur de fond du header */
+    padding: 10px 0;
+    top: 0;
+    z-index: 1000;
+    height: 75px; /* Réduction de la hauteur du header à 75px */
+  }
+  
+  .admin-page-header h1 {
+    text-align: center;
+    color: white;
+  }
+  
+  .admin-content {
+    margin-top: 20px;
+  }
+  

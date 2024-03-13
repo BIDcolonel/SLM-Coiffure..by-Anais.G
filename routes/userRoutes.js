@@ -1,3 +1,9 @@
+/**
+ * Fichier : userRoutes.js
+ * Description : Route pour les utilisateurs de l'application SLM Coiffure...by Anais.G
+ * Auteur : BOUDIER Christophe
+ */
+
 const express = require('express');
 const router = express.Router();
 const UserController = require('../controllers/userController.js');

@@ -1,0 +1,47 @@
+.avis-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.avis-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #161616;
+}
+
+.avis-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-gap: 20px;
+}
+
+.avis-item {
+  background-color: #f9f7f7;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.avis-item:hover {
+  transform: translateY(-5px);
+}
+
+.avis-item h3 {
+  margin-bottom: 10px;
+  color: #4a4e69;
+}
+
+.avis-item p {
+  margin-top: 10px;
+  color: #6b7c93;
+}
+
+.star-rating {
+  margin-bottom: 10px;
+}
+
+.star-rating .rating-value {
+  color: #f9ca24;
+}

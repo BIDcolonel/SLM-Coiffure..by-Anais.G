@@ -1,3 +1,9 @@
+/**
+ * Fichier : galleryController.js
+ * Description : Contrôleur pour la galerie de photos de l'application SLM Coiffure...by Anais.G
+ * Auteur : BOUDIER Christophe
+ */
+
 const GalleryPhoto = require('../models/galleryModel');
 
 // Contrôleur pour ajouter une image à la galerie

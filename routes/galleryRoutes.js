@@ -1,3 +1,9 @@
+/**
+ * Fichier : galleryRoutes.js
+ * Description : Route pour les images de la galerie de l'application SLM Coiffure...by Anais.G
+ * Auteur : BOUDIER Christophe
+ */
+
 const express = require('express');
 const router = express.Router();
 const GalleryController = require('../controllers/galleryController.js');

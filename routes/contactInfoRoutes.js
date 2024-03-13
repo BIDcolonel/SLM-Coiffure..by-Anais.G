@@ -1,3 +1,9 @@
+/**
+ * Fichier : contactInfoRoutes.js
+ * Description : Route pour les informations de contact de l'application SLM Coiffure...by Anais.G
+ * Auteur : BOUDIER Christophe
+ */
+
 const express = require('express');
 const router = express.Router();
 const ContactInfoController = require('../controllers/contactInfoController.js');
